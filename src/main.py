@@ -1,5 +1,8 @@
 from fastapi import FastAPI
+
 from src.utils.utils import get_variable
+from src.data.engine.engine import engine, SessionLocal
+from src.data.schema.airport import airport
 
 import uvicorn
 
@@ -13,6 +16,12 @@ app = FastAPI(
     version=VERSION,
 )
 
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 @app.get("/")
 async def root():
@@ -20,4 +29,5 @@ async def root():
 
 
 if __name__ == "__main__":
+    airport.Base.metadata.create_all(bind=engine)
     uvicorn.run("main:app", host=HOST, port=PORT, reload=True)

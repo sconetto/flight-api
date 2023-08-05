@@ -576,3 +576,6 @@ MigrationBackup/
 
 # Visual Studo Code config files
 .vscode/
+
+# SQLite Database
+flight.db

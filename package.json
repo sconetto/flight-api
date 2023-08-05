@@ -1,0 +1,15 @@
+{
+  "name": "flight-api",
+  "version": "0.0.1",
+  "description": "Generic Application API for Flying Devices - Flight API - Built with FastAPI",
+  "main": "src/main.py",
+  "repository": "https://github.com/sconetto/flight-api",
+  "author": "João Pedro Sconetto",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "release": "standard-version"
+  },
+  "dependencies": {
+    "standard-version": "^9.5.0"
+  }
+}

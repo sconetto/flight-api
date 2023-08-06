@@ -1,6 +1,11 @@
-import json
-from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+from src.data.engine.engine import get_db
+from src.data.schema.airport.crud import (
+    get_airport_by_code,
+    get_airport_by_icao,
+    create_airport as db_create_airport,
+)
 from src.models.airport.airport import Airport
 
 # GET - Read
@@ -14,9 +19,27 @@ ROUTER = APIRouter()
 
 
 @ROUTER.post("/", response_model=Airport)
-async def create_airport(airport: Airport):
-    data = json.loads(airport)
-    return data
+async def create_airport(airport: Airport, db: Session = Depends(get_db)):
+    if get_airport_by_code(db, airport.code):
+        raise HTTPException(
+            status_code=400,
+            detail=f"Airport with Code {airport.code} already exists!"
+        )
+
+    if get_airport_by_icao(db, airport.icao):
+        raise HTTPException(
+            status_code=400,
+            detail=f"Airport with ICAO code {airport.icao} already exists!",
+        )
+
+    try:
+        db_create_airport(db, airport)
+        return airport
+    except Exception as err:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error while creating airport. Traceback: {err}",
+        )
 
 
 @ROUTER.options("/")
@@ -33,7 +56,7 @@ async def describe_route():
 
 
 @ROUTER.get("/{identifier}", response_model=Airport)
-async def create_airport(
+async def get_airport(
     identifier: str,
 ):
     raise NotImplementedError

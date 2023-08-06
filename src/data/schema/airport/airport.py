@@ -19,7 +19,7 @@ class Airport(Base):
     phone = Column(String, default=None)
     email = Column(String, unique=True, default=None)
     url = Column(String, default=None)
-    runway_lenght = Column(Integer)
+    runway_length = Column(Integer)
     elevation = Column(Integer, default=None)
     icao = Column(String, unique=True, index=True)
     direct_flights = Column(Integer)

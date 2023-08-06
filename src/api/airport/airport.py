@@ -30,8 +30,7 @@ async def create_airport(airport: Airport, db: Session = Depends(get_db)):
     """
     if get_airport_by_code(db, airport.code):
         raise HTTPException(
-            status_code=400,
-            detail=f"Airport with Code {airport.code} already exists!"
+            status_code=400, detail=f"Airport with Code {airport.code} already exists!"
         )
 
     if get_airport_by_icao(db, airport.icao):

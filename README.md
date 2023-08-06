@@ -137,6 +137,7 @@ pytest src/                            # Performs the tests
 pytest --cov=. src/                    # Performs tests evaluating coverage
 pytest --cov=. --cov-report xml src/   # Generate the XML report of coverage
 flake8 src/                            # Run PEP8 linter
+bandit .                               # Run bandit security checks
 unset PYTHONPATH                       # Unset PYTHONPATH variable
 ```
 

@@ -6,7 +6,7 @@ from src.data.schema.airport.crud import (
     get_airport_by_icao,
     create_airport as db_create_airport,
 )
-from src.models.airport.airport import Airport
+from src.model.airport.airport import Airport
 
 # GET - Read
 # POST - Create

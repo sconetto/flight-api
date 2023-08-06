@@ -133,6 +133,7 @@ To run the Flight API tests follow the script below:
 
 ```shell
 export PYTHONPATH=$(pwd)               # Set the python path as the project folder
+pipenv install --dev                   # Install dev dependencies
 pytest src/                            # Performs the tests
 pytest --cov=. src/                    # Performs tests evaluating coverage
 pytest --cov=. --cov-report xml src/   # Generate the XML report of coverage

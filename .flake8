@@ -1,0 +1,13 @@
+[flake8]
+# a = [1, 2, 3, 4, 5]
+# b = a[1 + 1 : 2 + 2]  # E203
+# E203 whitespace before ':' --> also linked to black style
+ignore = W503, E203
+# venv_* folder is virtual environment folder
+# which will be created when running job on Jenkins
+exclude = .git,__pycache__,venv_*,test_*.py
+per-file-ignores =
+    # imported but unused
+    __init__.py: F401
+# align with black line length
+max-line-length = 88

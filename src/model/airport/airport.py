@@ -1,10 +1,14 @@
 from datetime import datetime
-from pydantic import BaseModel, HttpUrl, validator
+from pydantic import BaseModel, ConfigDict, HttpUrl, field_validator
 from typing import Optional
 from uuid import UUID, uuid4
 
 
 class Airport(BaseModel):
+    # Pydantic's from_attributes will tell the Pydantic model to read
+    # the data even if it is not a dict, but an ORM model (or any other
+    # arbitrary object with attributes).
+    model_config = ConfigDict(from_attributes=True)
     id: UUID = uuid4()
     created_at: datetime = datetime.now()
     updated_at: datetime = datetime.now()
@@ -28,34 +32,32 @@ class Airport(BaseModel):
     direct_flights: int
     carriers: int
 
-    @validator("phone", pre=True, always=True)
+    @field_validator("phone")
+    @classmethod
     def validate_empty_phones(cls, value):
         if not value:
             return None
         return value
 
-    @validator("email", pre=True, always=True)
+    @field_validator("email")
+    @classmethod
     def validate_empty_emails(cls, value):
         if not value:
             return None
         return value
 
-    @validator("url", pre=True, always=True)
+    @field_validator("url")
+    @classmethod
     def validate_empty_urls(cls, value):
         if not value:
             return None
         return value
 
-    @validator("elevation", pre=True, always=True)
+    @field_validator("elevation")
+    @classmethod
     def validate_elevation(cls, value):
         if not value:
             return None
         elif value and isinstance(value, str):
             return int(value)
         return value
-
-    class Config:
-        # Pydantic's from_attributes will tell the Pydantic model to read
-        # the data even if it is not a dict, but an ORM model (or any other
-        # arbitrary object with attributes).
-        from_attributes = True

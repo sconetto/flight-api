@@ -1,5 +1,5 @@
 from datetime import datetime
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel, HttpUrl, validator
 from typing import Optional
 from uuid import UUID, uuid4
 
@@ -13,12 +13,13 @@ class Airport(BaseModel):
     longitude: float
     name: str
     city: str
+    state: str
     country: str
     tz: str
     phone: Optional[str] = None
     email: Optional[str] = None
     url: Optional[HttpUrl] = None
-    runway_lenght: int = 0
+    runway_length: int
     elevation: Optional[int] = None
     # ICAO airport code or location indicator is a four-letter code
     # designating aerodromes around the world.
@@ -26,6 +27,32 @@ class Airport(BaseModel):
     icao: str
     direct_flights: int
     carriers: int
+
+    @validator("phone", pre=True, always=True)
+    def validate_empty_phones(cls, value):
+        if not value:
+            return None
+        return value
+
+    @validator("email", pre=True, always=True)
+    def validate_empty_emails(cls, value):
+        if not value:
+            return None
+        return value
+
+    @validator("url", pre=True, always=True)
+    def validate_empty_urls(cls, value):
+        if not value:
+            return None
+        return value
+
+    @validator("elevation", pre=True, always=True)
+    def validate_elevation(cls, value):
+        if not value:
+            return None
+        elif value and isinstance(value, str):
+            return int(value)
+        return value
 
     class Config:
         # Pydantic's from_attributes will tell the Pydantic model to read

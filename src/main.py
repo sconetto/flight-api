@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from src.api.airport.airport import ROUTER as AIRPORT
 from src.utils.utils import get_variable
-from src.data.engine.engine import engine, SessionLocal
+from src.data.engine.engine import engine
 from src.data.schema.airport import airport
 
 import uvicorn
@@ -20,17 +20,9 @@ app = FastAPI(
 app.include_router(AIRPORT, prefix="/v1/airport", tags=["Airport"])
 
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
 @app.get("/")
 async def root():
-    return {"Hello": "Wolrd!"}
+    return {"message": "Hello Wolrd!"}
 
 
 if __name__ == "__main__":

@@ -20,6 +20,14 @@ ROUTER = APIRouter()
 
 @ROUTER.post("/", response_model=Airport)
 async def create_airport(airport: Airport, db: Session = Depends(get_db)):
+    """
+    Endpoint that creates the airport received via the base airport route
+
+    :param airport: requrest data mapped on Airport model
+    :param db: session for database connection with sqlite
+
+    :returns: Airport cleaned and created on the database
+    """
     if get_airport_by_code(db, airport.code):
         raise HTTPException(
             status_code=400,
@@ -44,6 +52,11 @@ async def create_airport(airport: Airport, db: Session = Depends(get_db)):
 
 @ROUTER.options("/")
 async def describe_route():
+    """
+    Describe all available routes for airport endpoints
+
+    :returns: A JSON (dict) with the description of the routes
+    """
     return {
         "GET": "/v1/airport/{identifier}",
         "DELETE": "/v1/airport/{identifier}",

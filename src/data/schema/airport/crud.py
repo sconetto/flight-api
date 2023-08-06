@@ -20,6 +20,15 @@ def get_airports(db: Session, skip: int = 0, limit: int = 100):
 
 
 def create_airport(db: Session, airport: schema.Airport):
+    """
+    Database function to map schema to create it on the database
+    Small data conversions occur from pydantic model type to SQL accepted ones
+
+    :param db: session to local connected database
+    :param airport: airport object with data to be saved on the db
+
+    :returns: record as created in the database
+    """
     record = schema.Airport(
         id=str(airport.id),
         created_at=airport.created_at,

@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### 0.0.2 (2023-08-06)
 
+First alpha delivery version
 
 ### Features
 
@@ -22,17 +23,14 @@ All notable changes to this project will be documented in this file. See [standa
 * **test:** add basic test for root route ([9463d74](https://github.com/sconetto/flight-api/commit/9463d743cc1a25ddf0675a7060a2724edf6fc9bd))
 * **test:** create airport api test ([ab13b41](https://github.com/sconetto/flight-api/commit/ab13b4136e67bdf4245b16235aac20c869f9dd37))
 
-
 ### Bug Fixes
 
 * **schema:** correction on airport schema ([f240ed1](https://github.com/sconetto/flight-api/commit/f240ed1ee52849ca2d305c3a569ed1dd4d25c489))
-
 
 ### Refactor
 
 * move session from main ([d83e53e](https://github.com/sconetto/flight-api/commit/d83e53e808a354ed51b24abfba3eaa869d8dc02a))
 * rename model folder ([273bad4](https://github.com/sconetto/flight-api/commit/273bad47795cc936ab3dbf891f63846a70b12d49))
-
 
 ### Chores
 
@@ -40,11 +38,9 @@ All notable changes to this project will be documented in this file. See [standa
 * **deps:** install httpx for testing ([51dc2c4](https://github.com/sconetto/flight-api/commit/51dc2c420fc49daa7ad75c9ed86ab40ffc6edd7f))
 * update .gitignore ([8e1e6a2](https://github.com/sconetto/flight-api/commit/8e1e6a2a3f122c63c71879634717a1c6d1136ad8))
 
-
 ### Style
 
 * apply black formatter ([b7a408e](https://github.com/sconetto/flight-api/commit/b7a408e627071bd19a2cbc8a04adba36614351e8))
-
 
 ### Documentation
 
